@@ -4,15 +4,13 @@ import os
 
 db_path = Path('database.csv')
 
-# def check_empty():
-#     if os.path.getsize(db_path) == 0:
-#         with open('names.csv', 'w', newline='', encoding='utf-8') as csvfile:
-#             fieldnames = ['id', 'title', 'note', 'date', 'time']
-#             writer = csv.DictWriter(csvfile, fieldnames=fieldnames, delimiter=';')
-#             writer.writeheader()
-#             writer.writerow({'id': '1', 'title': 'test'})
-#     else:
-#         pass
+
+def check_empty():
+    if os.path.getsize(db_path) == 0:
+        with open(db_path, 'w', encoding='utf-8') as csvfile:
+            csvfile.writelines(f'id;title;note;date;time\n')
+    else:
+        pass
 
 
 def write_to_db(new_dict: dict):
@@ -33,3 +31,11 @@ def get_id() -> int:
         else:
             return int(max(ids)) + 1
 
+
+def get_all() -> list:
+    with open(db_path, 'r', encoding='utf-8') as db:
+        reader = csv.DictReader(db, delimiter=';')
+        rows = []
+        for row in reader:
+            rows.append(row)
+    return rows

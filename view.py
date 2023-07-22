@@ -1,4 +1,4 @@
-from sys import exit
+from datetime import datetime
 
 
 def launch():
@@ -9,3 +9,10 @@ def launch():
 
 def type_data(message):
     return input(f'{message}')
+
+
+def print_search(notes: list):
+
+    for row in notes:
+        print(*(x + ' : ' + y + ' ' for x, y in row.items()))
+

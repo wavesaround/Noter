@@ -20,7 +20,8 @@ def new_note():
 
 
 def open_list():
-    pass
+    get_row = db.get_all()
+    view.print_search(get_row)
 
 
 def edit_note():
@@ -32,6 +33,7 @@ def delete_note():
 
 
 def start():
+    db.check_empty()
     view.launch()
     go_button = input('')
     match go_button:
