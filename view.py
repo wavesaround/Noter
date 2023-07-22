@@ -12,7 +12,10 @@ def type_data(message):
 
 
 def print_search(notes: list):
-
-    for row in notes:
+    list_sort = sorted(
+        notes,
+        key=lambda x: datetime.strptime(x['date'], '%d-%m-%Y'), reverse=True
+    )
+    for row in list_sort:
         print(*(x + ' : ' + y + ' ' for x, y in row.items()))
 
