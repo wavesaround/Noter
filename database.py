@@ -70,7 +70,6 @@ def delete_card(str_target: str):
                 pass
             else:
                 db_write.write(line)
-    alert_return(True)
 
 
 def edit_one(new_row):
@@ -85,4 +84,7 @@ def edit_one(new_row):
                 writer.writerow(new_row)
             else:
                 writer.writerow(row)
+    alert_return(True)
 
+def delete_note(param):
+    return None

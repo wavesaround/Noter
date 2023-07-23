@@ -68,6 +68,8 @@ def action_menu():
 
 
 def type_note(input_text):
-    # input(keyboard.write(input_text, delay=0, restore_state_after=False, exact=None))
-    print(input_text)
-    return input('\n')
+    print('Введите изменения: \n')
+    keyboard.write(input_text, exact=False)
+    temp = input('')
+    return str(temp)
+    # print(input_text)

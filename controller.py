@@ -43,22 +43,16 @@ def open_list():
 def edit_note():
     note_id = view.type_data('Введите id заметки\n')
     get_row = db.get_one(note_id)
-    get_row['note'] = view.type_data('Введите изменения: \n')
+    get_row['note'] = view.type_note(get_row['note'])
     get_row['date'] = datetime.today().strftime("%d-%m-%Y")
     get_row['time'] = datetime.today().strftime("%H:%M:%S")
     db.edit_one(get_row)
 
 
 def delete_note():
-    del_id = 1
-    input_data = view.type_data('Введите ID заметки: ')
-    get_rows = db.search_data(input_data)
-    view.print_search(get_rows)
-    # if len(get_rows) > 1:
-    #     del_id = int(view.type_data('Введите номер контакта для редактирования '))
-    #     view.print_card(get_rows[del_id - 1])
+    note_id = view.type_data('Введите id заметки\n')
     view.sure('delete')
-    db.delete_card(get_rows[del_id - 1])
+
 
 
 def start():
