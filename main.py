@@ -1,7 +1,7 @@
-import controller
-from os import system
+if __name__ == '__main__':
+    import controller
+    from os import system
 
+    system('clear')
 
-system('clear')
-
-controller.start()
+    controller.start()

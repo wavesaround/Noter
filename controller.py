@@ -41,7 +41,12 @@ def open_list():
 
 
 def edit_note():
-    pass
+    note_id = view.type_data('Введите id заметки\n')
+    get_row = db.get_one(note_id)
+    get_row['note'] = view.type_data('Введите изменения: \n')
+    get_row['date'] = datetime.today().strftime("%d-%m-%Y")
+    get_row['time'] = datetime.today().strftime("%H:%M:%S")
+    db.edit_one(get_row)
 
 
 def delete_note():
@@ -59,7 +64,7 @@ def delete_note():
 def start():
     db.check_empty()
     view.launch()
-    go_button = input('')
+    go_button = view.type_data('')
     match go_button:
         case '1':
             open_list()

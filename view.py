@@ -40,8 +40,10 @@ def alert_return(flag):
 
 def sure(question):
     match question:
+        case 'edit':
+            type_que = ', что хотите изменить заметку?'
         case 'delete':
-            type_que = ', что хотите удалить контакт'
+            type_que = ', что хотите удалить заметку'
         case _:
             type_que = '?'
     user_type = input(f'Вы уверены{type_que}? Y / N: ').lower()
@@ -64,3 +66,8 @@ def action_menu():
     )
     return input('--> ')
 
+
+def type_note(input_text):
+    # input(keyboard.write(input_text, delay=0, restore_state_after=False, exact=None))
+    print(input_text)
+    return input('\n')

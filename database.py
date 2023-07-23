@@ -53,11 +53,11 @@ def get_all() -> list:
     return rows
 
 
-def get_one(id: int):
+def get_one(note_id: int):
     with open(db_path, 'r', encoding='utf-8') as db:
         reader = csv.DictReader(db, fieldnames=None, delimiter=';')
         for row in reader:
-            if row['id'] == id:
+            if row['id'] == note_id:
                 return row
 
 
@@ -71,3 +71,18 @@ def delete_card(str_target: str):
             else:
                 db_write.write(line)
     alert_return(True)
+
+
+def edit_one(new_row):
+    fieldnames = ['id', 'title', 'note', 'date', 'time']
+    with open(db_path, 'r', encoding='utf-8') as db_read:
+        reader = csv.DictReader(db_read, fieldnames=fieldnames, delimiter=';')
+        rows = list(reader)
+    with open(db_path, 'w', encoding='utf-8') as db_write:
+        writer = csv.DictWriter(db_write, fieldnames=fieldnames, delimiter=';', quoting=csv.QUOTE_NONE)
+        for row in rows:
+            if row['id'] == new_row['id']:
+                writer.writerow(new_row)
+            else:
+                writer.writerow(row)
+
