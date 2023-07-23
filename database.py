@@ -1,6 +1,7 @@
 from pathlib import Path
 import csv
 import os
+from view import alert_return
 
 db_path = Path('database.csv')
 
@@ -32,6 +33,17 @@ def get_id() -> int:
             return int(max(ids)) + 1
 
 
+def search_data(data: str) -> list:
+    search_result = []
+    new_data = data.replace(' ', ';').lower()
+    with open(db_path, 'r', newline='') as db_main:
+        reader = csv.reader(db_main, delimiter=';')
+        for row in reader:
+            if new_data in row:
+                search_result.append(row)
+        return search_result
+
+
 def get_all() -> list:
     with open(db_path, 'r', encoding='utf-8') as db:
         reader = csv.DictReader(db, delimiter=';')
@@ -39,3 +51,23 @@ def get_all() -> list:
         for row in reader:
             rows.append(row)
     return rows
+
+
+def get_one(id: int):
+    with open(db_path, 'r', encoding='utf-8') as db:
+        reader = csv.DictReader(db, fieldnames=None, delimiter=';')
+        for row in reader:
+            if row['id'] == id:
+                return row
+
+
+def delete_card(str_target: str):
+    with open(db_path, 'r') as db_read:
+        lines = db_read.readlines()
+    with open(db_path, 'w') as db_write:
+        for line in lines:
+            if line == str_target:
+                pass
+            else:
+                db_write.write(line)
+    alert_return(True)

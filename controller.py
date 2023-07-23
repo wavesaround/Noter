@@ -19,9 +19,25 @@ def new_note():
     db.write_to_db(new_dict)
 
 
+def open_note():
+    note_id = view.type_data('Введите id заметки\n')
+    get_row = db.get_one(note_id)
+    view.print_one(get_row)
+
+
 def open_list():
     get_row = db.get_all()
     view.print_search(get_row)
+    match view.action_menu():
+        case 'open':
+            open_note()
+        case 'edit':
+            edit_note()
+        case 'del':
+            delete_note()
+        case _:
+            print('ОШИБКА: Неверный ключ\n')
+            start()
 
 
 def edit_note():
@@ -29,7 +45,15 @@ def edit_note():
 
 
 def delete_note():
-    pass
+    del_id = 1
+    input_data = view.type_data('Введите ID заметки: ')
+    get_rows = db.search_data(input_data)
+    view.print_search(get_rows)
+    # if len(get_rows) > 1:
+    #     del_id = int(view.type_data('Введите номер контакта для редактирования '))
+    #     view.print_card(get_rows[del_id - 1])
+    view.sure('delete')
+    db.delete_card(get_rows[del_id - 1])
 
 
 def start():
