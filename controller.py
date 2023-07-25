@@ -50,9 +50,9 @@ def edit_note():
 
 
 def delete_note():
-    note_id = view.type_data('Введите id заметки\n')
-    view.sure('delete')
-
+    print('****************************************')
+    print('Извините, эта функция еще не реализована')
+    print('****************************************')
 
 
 def start():
